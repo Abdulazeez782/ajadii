@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Bars2Icon, XMarkIcon } from '@heroicons/react/16/solid'
 import { navMenu } from '../constants'
 import { motion } from 'motion/react'
@@ -30,9 +30,27 @@ const Nav = () => {
             },
         },
     }
+
+    const [time, setTime] = useState(new Date());
+
+    useEffect(() => {
+        const intervalId = setInterval(() => {
+            setTime(new Date());
+        }, 1000)
+
+        return () => clearInterval(intervalId);
+    }, []);
+
+    const formatTime = (date) => {
+        const hours = String(date.getHours()).padStart(2, "0")
+        const minutes = String(date.getMinutes()).padStart(2, "0")
+        const seconds = String(date.getSeconds()).padStart(2, "0")
+
+        return `${hours}:${minutes}:${seconds}`;
+    }
   return (
     <section 
-        className='px-[1rem] py-[1.5rem] lg:px-[3rem] flex justify-between items-center gap-5 bg-[#244855] text-[#E64833]'
+        className='px-[1rem] py-[1.5rem] lg:px-[3rem] flex justify-between items-center gap-5 bg-[#244855] text-[#E64833] sticky top-0 z-40'
     >
         <a 
             href='/'
@@ -48,6 +66,8 @@ const Nav = () => {
                 {navMenu.map((menu, index) => (
                     <a
                         key={index}
+                        href={menu.link}
+                        className='cursor-pointer relative pb-1 hover:before:w-full before:content-[""] before:absolute before:bottom-0 before:left-0 before:w-0 before:h-[1px] before:bg-[#FBE9D0] before:transition-all before:duration-300'
                     >
                         {menu.label}
                     </a>
@@ -66,6 +86,9 @@ const Nav = () => {
                 {navMenu.map((menu, index) => (
                     <a
                         key={index}
+                        href={menu.link}
+                        className='cursor-pointer'
+                        onClick={closeSideBar}
                     >
                         {menu.label}
                     </a>
@@ -80,7 +103,7 @@ const Nav = () => {
             <Bars2Icon className='h-[2rem] w-[2rem] block md:hidden'/>
         </div>
 
-        <h1 className='hidden md:block'>Time</h1>
+        <h1 className='hidden md:block'>{formatTime(time)}</h1>
     </section>
   )
 }
