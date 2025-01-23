@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react'
 import { Bars2Icon, XMarkIcon } from '@heroicons/react/16/solid'
 import { navMenu } from '../constants'
 import { motion } from 'motion/react'
+import { Link, useLocation } from 'react-router-dom'
 
 const Nav = () => {
+    const location = useLocation();
     const [sideBar, setSideBar] = useState(false);
     const openSideBar = () => {        
         setSideBar(true);
@@ -59,22 +61,25 @@ const Nav = () => {
             <h1>AJADII</h1>
         </a>
 
+       { (location.pathname === '/modelling-portfolio') ?
+        "" : 
         <nav 
             className='hidden md:block'
         >
             <div className='flex gap-4'>
                 {navMenu.map((menu, index) => (
-                    <a
+                    <Link
                         key={index}
-                        href={menu.link}
+                        to={menu.link}
                         className='cursor-pointer relative pb-1 hover:before:w-full before:content-[""] before:absolute before:bottom-0 before:left-0 before:w-0 before:h-[1px] before:bg-[#FBE9D0] before:transition-all before:duration-300'
                     >
                         {menu.label}
-                    </a>
+                    </Link>
                 ))}
             </div>
-        </nav>
+        </nav>}
 
+        {/* Navigation menu for mobile */}
         <motion.nav
             initial="closed"
             animate={sideBar ? "open" : "closed"}
@@ -84,24 +89,24 @@ const Nav = () => {
             <XMarkIcon className='h-[6rem] w-[5rem] mb-5' onClick={closeSideBar}/>
             <div className='flex flex-col gap-4'>
                 {navMenu.map((menu, index) => (
-                    <a
+                    <Link
                         key={index}
-                        href={menu.link}
+                        to={menu.link}
                         className='cursor-pointer'
                         onClick={closeSideBar}
                     >
                         {menu.label}
-                    </a>
+                    </Link>
                 ))}
             </div>
         </motion.nav>
 
-        <div
+        {(location.pathname === '/modelling-portfolio') ? "" : <div
             onClick={openSideBar}
             className={`${(sideBar) ? "hidden" : "block"}`}
         >
             <Bars2Icon className='h-[2rem] w-[2rem] block md:hidden'/>
-        </div>
+        </div>}
 
         <h1 className='hidden md:block'>{formatTime(time)}</h1>
     </section>

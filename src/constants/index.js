@@ -1,11 +1,11 @@
 import { shopingoImage, staticJobImage, interactiveCommentsImage, nikeImage, htmlImage, cssImage, javascriptImage, reactImage, tailwindImage, githubImage, instagramImage, xImage, emailImage, linkdedInImage } from "../assets/images"
 
 export const navMenu = [
-    {label: "Home", link: "/"},
-    {label: "Projects", link: "#projects"},
+    {label: "Home", link: "/#home"},
+    {label: "Projects", link: "/#projects"},
     {label: "Resume", link: ""},
-    {label: "Modelling Portfolio", link: ""},    
-    {label: "Get In Touch", link: "#footer"},
+    {label: "Modelling Portfolio", link: "/modelling-portfolio"},    
+    {label: "Get In Touch", link: "/#footer"},
 ]
 
 export const projects = [

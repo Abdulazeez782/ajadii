@@ -12,6 +12,7 @@ import instagramImage from './instagram.png'
 import xImage from './twitter.png'
 import emailImage from './gmail.png'
 import linkdedInImage from './linkedin.png'
+import portfolioImage1 from './portfolio-image1.jpg'
 
 export {
     shopingoImage,
@@ -27,5 +28,6 @@ export {
     instagramImage,
     xImage,
     emailImage,
-    linkdedInImage
+    linkdedInImage,
+    portfolioImage1
 }
